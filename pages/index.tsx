@@ -1,84 +1,51 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { ChangeEvent, useState } from 'react'
+import Management from './components/Management'
+import SalesForm from './components/SalesForm'
+import {AiOutlineMenuFold} from 'react-icons/ai'
+
 
 const Home: NextPage = () => {
+
+  const [passCode, setPassCode]=useState<any>()
+
+  const pass = 2020;
+  const passAdm =5050;
+
+  const client = pass == passCode
+  const admin = passAdm == passCode
+
+
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex h-screen flex-col items-center justify-center py-4">
       <Head>
-        <title>Create Next App</title>
+        <title>Sport Bet Uyo</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      { client ||  admin &&
+        <div onClick={()=>setPassCode('')} className="text-xl m-1 text-orange-600 font-bold">
+        <AiOutlineMenuFold/>
         </div>
-      </main>
+     }
+      {
+        !client && !admin &&
+       <div className=" flex flex-col space-y-2 bg-gray-400 h-44 shadow-lg w-96 items-center justify-center rounded-lg ">
 
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
+       <input value={passCode} onChange={(e: ChangeEvent<HTMLInputElement>)=>setPassCode(e.target.value)} type="password" placeholder="PassCode" className=" px-2 outline-dotted rounded-lg p-2 "/>
+
+       <button className=" bg-orange-500 p-2 px-6 rounded-lg mt-8 text-white ">Send</button>
+
+      </div>
+
+    }
+
+     {client && <SalesForm/>}
+
+     {admin && <Management/>}
     </div>
   )
 }
