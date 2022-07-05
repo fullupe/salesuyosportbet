@@ -143,7 +143,7 @@ function Management() {
                  
                   </p>
             </div>
-            <p className="text-orange-500 text-sm pb-2 font-cinzel">Total CashIn + Exp</p>
+            <p className="text-orange-500 text-sm pb-2 font-cinzel">Total CashIn +</p>
             </div>
 
             <div className="shadow-xl border-2 items-center border-red-300 flex flex-col px-2">
@@ -166,7 +166,7 @@ function Management() {
         <div className="bg-white  flex  w-full h-3/4 shadow-xl rounded-2xl items-center flex-col pt-1 overflow-y-scroll">
            
 
-        <Swiper className="flex  flex-col h-full w-80 md:w-2/2 gap-5 mt-4 "
+        <Swiper className="flex  flex-col h-full w-80 md:w-2/2 gap-5 mt-4  "
          // install Swiper modules
          modules={[Pagination]}
          spaceBetween={40}
@@ -200,9 +200,6 @@ function Management() {
                     quantity={review[1].reduce((total: any, value: { salesSi: any; })=>total+Number(value.salesSi),0)+review[1].reduce((total: any, value: { sport: any; })=>total+Number(value.sport),0)+review[1].reduce((total: any, value: { vitual: any; })=>total+Number(value.vitual),0)+review[1].reduce((total: any, value: { float: any; })=>total+Number(value.float),0) }
                     currency='NGN'
                     />
-                    
-                    
-                    
                     </p> 
                     </div> 
 
@@ -241,7 +238,62 @@ function Management() {
                     </div> 
 
                     </div>
+                    
+                    <div className="bg-orange-300 shadow-xl rounded-lg w-full  flex p-2 space-x-2 items-center justify-between">
+                      <div >
+                        <p className="text-xs">vitual</p>
+                        <p className="text-xs">
+                        <Currency
+                            quantity={review[1].reduce((total: any, value: { vitual: any; })=>total+Number(value.vitual),0)}
+                            currency="NGN"
+                            
+                            />
+                          
+                          </p>
+                      </div>
 
+                      <div>
+                      <p className="text-xs">sports</p>
+                      <p className="text-xs">
+                      <Currency
+                            quantity={review[1].reduce((total: any, value: { sport: any; })=>total+Number(value.sport),0)}
+                            currency="NGN"
+                            
+                            />
+                        
+                        </p>
+                      </div>
+
+                      <div>
+                      <p className="text-xs">sales-Si</p>
+                      <p className="text-xs">
+
+                      <Currency
+                            quantity={review[1].reduce((total: any, value: { salesSi: any; })=>total+Number(value.salesSi),0)}
+                            currency="NGN"
+                            
+                            />
+                        
+                        
+                      </p>
+                      </div>
+
+                      <div>
+                      <p className="text-xs">float</p>
+                      <p className="text-xs">
+
+                      <Currency
+                            quantity={review[1].reduce((total: any, value: { float: any; })=>total+Number(value.float),0)}
+                            currency="NGN"
+                            
+                            />
+                        
+                        
+                        
+                        </p>
+                      </div>
+                    </div>
+                  
                  
 
                     <div className="flex flex-col h-full w-full overflow-y-scroll  bg-yellow-00 pb-8 space-y-2 scrollbar-hide ">
@@ -261,6 +313,12 @@ function Management() {
 
                             <div className="flex flex-col items-center">
                             <p className=" flex text-xs text-orange-500">Sales</p>
+
+                            <p className="text-orange-500 text-xs">vl: <span className="text-gray-500">{details.vitual}</span></p>
+                            <p className="text-orange-500 text-xs">sp: <span className="text-gray-500">{details.sport}</span></p>
+                            <p className="text-orange-500 text-xs">si: <span className="text-gray-500">{details.salesSi}</span></p>
+                            <p className="text-orange-500 text-xs">fl: <span className="text-gray-500">{details.float}</span></p>
+
                             <p className="text-xs text-gray-500 p-4"> 
                             <Currency
                             quantity={details?.salesSi+details.sport+details.vitual+details.float}
@@ -270,7 +328,8 @@ function Management() {
                               </p>
                             </div>
 
-                            <div className=" flex-flex-col items-center">
+
+                            <div className=" flex flex-col items-center">
                             <p className="text-xs text-orange-500">CashIn</p>
 
                             <p className="text-xs text-gray-500 p-4">
